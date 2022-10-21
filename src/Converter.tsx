@@ -1,3 +1,4 @@
+import { Input, MenuItem, Select } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { ExchangeRate } from "./App";
 
@@ -45,7 +46,14 @@ export function Converter(props: {exchangeRates: ExchangeRate[]}){
     
     return (
         <>
-            <form>
+            <Input type="number" value={czechValue} onChange={handleChange}/>
+            CZK = {convertedValue.toFixed(2)}
+            <Select>
+                {props.exchangeRates.map((exchangeRate) => 
+                    <MenuItem key={'select_' + exchangeRate.code}>{exchangeRate.code} ({exchangeRate.country} {exchangeRate.currency})</MenuItem>
+                )}
+            </Select>
+            {/* <form>
                 <input type='text' value={czechValue} onChange={handleChange}/>
                 <select name='currency'>
                     {props.exchangeRates.map(value => (
@@ -54,7 +62,7 @@ export function Converter(props: {exchangeRates: ExchangeRate[]}){
                 </select>
                 <input type='submit' value='convert'/>
             </form>
-            {convertedValue && <div>{convertedValue.toFixed(2)}</div>}
+            {convertedValue && <div>{convertedValue.toFixed(2)}</div>} */}
         </>
     );
 }
