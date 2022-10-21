@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import './App.css';
@@ -12,11 +13,11 @@ const cnbURL = 'https://www.cnb.cz/en/financial-markets/foreign-exchange-market/
 const exchangeRegex = /(?<country>[A-Za-z ]*)\|(?<currency>[A-Za-z ]*)\|(?<amount>[0-9]*)\|(?<code>[A-Z]{3})\|(?<rate>[0-9.]*)/m
 
 export type ExchangeRate = {
-  country: String,
-  currency: String,
-  amount: Number,
-  code: String,
-  rate: Number,
+  country: string,
+  currency: string,
+  amount: number,
+  code: string,
+  rate: number,
 }
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
   
   return (
     <div className="App">
+      <Typography variant='h3'>Currency converter</Typography>
       <Converter exchangeRates={exchangeRates || []}/>
     </div>
   );
