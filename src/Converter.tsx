@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-
-const cnbURL = 'https://www.cnb.cz/en/financial-markets/foreign-exchange-market/central-bank-exchange-rate-fixing/central-bank-exchange-rate-fixing/daily.txt';
+import { ExchangeRate } from "./App";
 
 // Country|Currency|Amount|Code|Rate
 // Australia|dollar|1|AUD|15.771
@@ -31,7 +30,7 @@ const exampleExchangeData = [
     },
 ]
 
-export function Converter(){
+export function Converter(props: {exchangeRates: ExchangeRate[]}){
     const [czechValue, setCzechValue] = useState(0);
     const [selectedExchangeData, setSelectedExchangeData] = useState(exampleExchangeData[0]);
     const [convertedValue, setConvertedValue] = useState(0);
@@ -49,8 +48,8 @@ export function Converter(){
             <form onSubmit={convert}>
                 <input type='text' value={czechValue} onChange={handleChange}/>
                 <select name='currency'>
-                    {exampleExchangeData.map(value => (
-                        <option key={value.code}>{value.code} ({value.country} {value.currency})</option>
+                    {props.exchangeRates.map(value => (
+                        <option>{value.code} ({value.country} {value.currency})</option>
                     ))}
                 </select>
                 <input type='submit' value='convert'/>
