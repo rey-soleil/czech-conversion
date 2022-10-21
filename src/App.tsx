@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Divider, Typography } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import './App.css';
@@ -44,7 +44,8 @@ function App() {
   
   return (
     <div className="App">
-      <Typography variant='h3'>Currency converter</Typography>
+      <Typography variant='h2'>Currency converter</Typography>
+      <Divider/>
       <Converter exchangeRates={exchangeRates || []}/>
     </div>
   );
