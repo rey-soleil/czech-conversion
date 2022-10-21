@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ExchangeRate } from "./App";
 
 // Country|Currency|Amount|Code|Rate
@@ -31,7 +31,7 @@ const exampleExchangeData = [
 ]
 
 export function Converter(props: {exchangeRates: ExchangeRate[]}){
-    const [czechValue, setCzechValue] = useState(0);
+    const [czechValue, setCzechValue] = useState(100);
     const [selectedExchangeData, setSelectedExchangeData] = useState(exampleExchangeData[0]);
     const [convertedValue, setConvertedValue] = useState(0);
 
@@ -39,13 +39,13 @@ export function Converter(props: {exchangeRates: ExchangeRate[]}){
         setCzechValue(Number(event.target.value));
     }
 
-    const convert = () => {
-        setConvertedValue(czechValue * selectedExchangeData['rate']);
-    }
+    useEffect(() => {
+        setConvertedValue(czechValue / selectedExchangeData.rate);
+    }, [czechValue, selectedExchangeData]);
     
     return (
         <>
-            <form onSubmit={convert}>
+            <form>
                 <input type='text' value={czechValue} onChange={handleChange}/>
                 <select name='currency'>
                     {props.exchangeRates.map(value => (
@@ -54,7 +54,7 @@ export function Converter(props: {exchangeRates: ExchangeRate[]}){
                 </select>
                 <input type='submit' value='convert'/>
             </form>
-            {convertedValue && <div>{convertedValue}</div>}
+            {convertedValue && <div>{convertedValue.toFixed(2)}</div>}
         </>
     );
 }
